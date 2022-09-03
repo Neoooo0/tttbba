@@ -1,8 +1,1 @@
-os
-requests
-hashlib
-time
-copy
-random
-smtplib
-email
+requests==2.26.0
