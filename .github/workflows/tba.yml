@@ -1,4 +1,4 @@
-name: 'Tieba'
+name: 'tba'
 
 on:
   push:
