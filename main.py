@@ -10,7 +10,7 @@ import random
 import smtplib
 from email.mime.text import MIMEText
 
-
+logFile = open("run.log", encoding="utf-8", mode="a")
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
