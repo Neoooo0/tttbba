@@ -231,6 +231,9 @@ def main():
 if __name__ == '__main__':
     main()
     filename = 'programming.txt'
+ 
+    logging.basicConfig(filename='flow.log',
+                        level=logging.INFO)
 
     with open(filename,'w') as file_object:
      file_object.write("I love programming.")
