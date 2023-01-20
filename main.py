@@ -229,7 +229,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+   
     filename = 'programming.txt'
     localtime = time.localtime(time.time())
     timestring = time.strftime ('%Y/%m/%d - %H:%M:%S')
@@ -239,3 +239,4 @@ if __name__ == '__main__':
 
     with open(filename,'w') as file_object:
      file_object.write("I love programming.")
+    main()
