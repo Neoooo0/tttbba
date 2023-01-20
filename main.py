@@ -231,9 +231,11 @@ def main():
 if __name__ == '__main__':
     main()
     filename = 'programming.txt'
- 
-    logging.basicConfig(filename='flow.log',
-                        level=logging.INFO)
+    localtime = time.localtime(time.time())
+    timestring = time.strftime ('%Y/%m/%d - %H:%M:%S')
+    inp=file("Log.txt", 'w')
+    inp.write('************** Full Process ****************\n')
+    inp.write('Local current time : %s' % timestring)
 
     with open(filename,'w') as file_object:
      file_object.write("I love programming.")
