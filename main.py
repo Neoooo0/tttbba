@@ -231,13 +231,9 @@ def main():
 if __name__ == '__main__':
    
     filename = 'programming.txt'
-    file = 'Log.txt'
     localtime = time.localtime(time.time())
     timestring = time.strftime ('%Y/%m/%d - %H:%M:%S')
-    inp=file("Log.txt", 'w')
-    inp.write('************** Full Process ****************\n')
-    inp.write('Local current time : %s' % timestring)
 
     with open(filename,'w') as file_object:
-     file_object.write("I love programming.")
+     file_object.write('Local current time : %s' % timestring)
     main()
