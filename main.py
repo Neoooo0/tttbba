@@ -231,6 +231,7 @@ def main():
 if __name__ == '__main__':
    
     filename = 'programming.txt'
+    file = 'Log.txt'
     localtime = time.localtime(time.time())
     timestring = time.strftime ('%Y/%m/%d - %H:%M:%S')
     inp=file("Log.txt", 'w')
