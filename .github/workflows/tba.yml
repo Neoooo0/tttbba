@@ -37,6 +37,10 @@ jobs:
       run: 
        python3 main.py
        
+    - name: Create New File with Current Time
+      run: |
+        echo $(date) > new_file.txt
+
     - name: Push log #更新日志
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
