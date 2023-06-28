@@ -225,15 +225,14 @@ def main():
             client_sign(i, tbs, j["id"], j["name"])
         logger.info("完成第" + str(n) + "个用户签到")
     send_email(favorites)
+    logger.error("所有用户签到结束")
     logger.info("所有用户签到结束")
 
 
 if __name__ == '__main__':
    
-    filename = 'programming.txt'
-    localtime = time.localtime(time.time())
-    timestring = time.strftime ('%Y/%m/%d - %H:%M:%S')
-
-    with open(filename,'w') as file_object:
-     file_object.write('Local current time : %s' % timestring)
+    LOG_FORMAT = "%(asctime)s\t%(levelname)s\t%(message)s"
+    logging.basicConfig(filename='flow.log',
+                        level=logging.ERROR, format=LOG_FORMAT)
+    
     main()
