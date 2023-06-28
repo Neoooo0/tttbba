@@ -151,6 +151,7 @@ def get_favorite(bduss):
         else:
             t.append(i)
     logger.info("获取关注的贴吧结束")
+    logger.error("所有用户签到结束")
     return t
 
 
@@ -167,6 +168,7 @@ def encodeData(data):
 def client_sign(bduss, tbs, fid, kw):
     # 客户端签到
     logger.info("开始签到贴吧：" + kw)
+    logger.error("所有用户签到结束")
     data = copy.copy(SIGN_DATA)
     data.update({BDUSS: bduss, FID: fid, KW: kw, TBS: tbs, TIMESTAMP: str(int(time.time()))})
     data = encodeData(data)
@@ -223,6 +225,7 @@ def main():
         for j in favorites:
             time.sleep(random.randint(1,5))
             client_sign(i, tbs, j["id"], j["name"])
+            logger.error("所有用户签到结束")
         logger.info("完成第" + str(n) + "个用户签到")
     send_email(favorites)
     logger.error("所有用户签到结束")
