@@ -50,21 +50,21 @@ s = requests.Session()
 
 
 def get_tbs(bduss):
-    logger.info("获取tbs开始")
+    print("获取tbs开始")
     headers = copy.copy(HEADERS)
     headers.update({COOKIE: EMPTY_STR.join([BDUSS, EQUAL, bduss])})
     try:
         tbs = s.get(url=TBS_URL, headers=headers, timeout=5).json()[TBS]
     except Exception as e:
-        logger.error("获取tbs出错" + e)
-        logger.info("重新获取tbs开始")
+        print("获取tbs出错" + e)
+        print("重新获取tbs开始")
         tbs = s.get(url=TBS_URL, headers=headers, timeout=5).json()[TBS]
-    logger.info("获取tbs结束")
+    print("获取tbs结束")
     return tbs
 
 
 def get_favorite(bduss):
-    logger.info("获取关注的贴吧开始")
+    print("获取关注的贴吧开始")
     # 客户端关注的贴吧
     returnData = {}
     i = 1
@@ -86,7 +86,7 @@ def get_favorite(bduss):
     try:
         res = s.post(url=LIKIE_URL, data=data, timeout=5).json()
     except Exception as e:
-        logger.error("获取关注的贴吧出错" + e)
+        print("获取关注的贴吧出错" + e)
         return []
     returnData = res
     if 'forum_list' not in returnData:
@@ -117,7 +117,7 @@ def get_favorite(bduss):
         try:
             res = s.post(url=LIKIE_URL, data=data, timeout=5).json()
         except Exception as e:
-            logger.error("获取关注的贴吧出错" + e)
+            print("获取关注的贴吧出错" + e)
             continue
         if 'forum_list' not in res:
             continue
@@ -147,8 +147,8 @@ def get_favorite(bduss):
                     t.append(j)
         else:
             t.append(i)
-    logger.info("获取关注的贴吧结束")
-    logger.error("所有用户签到结束")
+    print("获取关注的贴吧结束")
+    print("所有用户签到结束")
     return t
 
 
@@ -164,8 +164,8 @@ def encodeData(data):
 
 def client_sign(bduss, tbs, fid, kw):
     # 客户端签到
-    logger.info("开始签到贴吧：" + kw)
-    logger.error("所有用户签到结束")
+    print("开始签到贴吧：" + kw)
+    print("所有用户签到结束")
     data = copy.copy(SIGN_DATA)
     data.update({BDUSS: bduss, FID: fid, KW: kw, TBS: tbs, TIMESTAMP: str(int(time.time()))})
     data = encodeData(data)
@@ -174,7 +174,7 @@ def client_sign(bduss, tbs, fid, kw):
 
 def send_email(sign_list):
     if ('HOST' not in ENV or 'FROM' not in ENV or 'TO' not in ENV or 'AUTH' not in ENV):
-        logger.error("未配置邮箱")
+        print("未配置邮箱")
         return
     HOST = ENV['HOST']
     FROM = ENV['FROM']
@@ -212,27 +212,22 @@ def send_email(sign_list):
 
 def main():
     if ('BDUSS' not in ENV):
-        logger.error("未配置BDUSS")
+        print("未配置BDUSS")
         return
     b = ENV['BDUSS'].split('#')
     for n, i in enumerate(b):
-        logger.info("开始签到第" + str(n) + "个用户" + i)
+        print("开始签到第" + str(n) + "个用户" + i)
         tbs = get_tbs(i)
         favorites = get_favorite(i)
         for j in favorites:
             time.sleep(random.randint(1,5))
             client_sign(i, tbs, j["id"], j["name"])
-            logger.error("所有用户签到结束")
-        logger.info("完成第" + str(n) + "个用户签到")
-    send_email(favorites)
-    logger.error("所有用户签到结束")
-    logger.info("所有用户签到结束")
+            print("所有用户签到结束")
+        print("完成第" + str(n) + "个用户签到")
+    # send_email(favorites)
+    print("所有用户签到结束")
+    print("所有用户签到结束")
 
 
 if __name__ == '__main__':
-   
-    LOG_FORMAT = "%(asctime)s\t%(levelname)s\t%(message)s"
-    logging.basicConfig(filename='flow.log',
-                        level=logging.INFO, format=LOG_FORMAT)
-    
     main()
