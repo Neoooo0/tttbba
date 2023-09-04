@@ -10,9 +10,6 @@ import random
 import smtplib
 from email.mime.text import MIMEText
 
-logFile = open("run.log", encoding="utf-8", mode="a")
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
 # API_URL
 LIKIE_URL = "http://c.tieba.baidu.com/c/f/forum/like"
@@ -236,6 +233,6 @@ if __name__ == '__main__':
    
     LOG_FORMAT = "%(asctime)s\t%(levelname)s\t%(message)s"
     logging.basicConfig(filename='flow.log',
-                        level=logging.ERROR, format=LOG_FORMAT)
+                        level=logging.INFO, format=LOG_FORMAT)
     
     main()
