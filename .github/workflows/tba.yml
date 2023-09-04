@@ -2,7 +2,6 @@ name: tiebasign
 
 on:
   schedule:
-    #国际标准时间19点00分，北京时间需要+8小时，代表北京时间次日3点运行，延迟20m，6.2*
     - cron: "0 19 * * *"
   
   workflow_dispatch:
@@ -33,9 +32,14 @@ jobs:
         
       run: 
        python3 main.py
-       
 
-    - name: Push log #更新日志
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: push
+    - name: Create run.log
+      run: echo $(date -u) > run.log
+      
+    - name: Commit run.log
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add run.log
+        git commit -m "Add run.log"
+        git push
