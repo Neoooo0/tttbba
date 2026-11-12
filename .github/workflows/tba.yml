@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: '3.11'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -30,8 +30,7 @@ jobs:
           TO: ${{ secrets.TO }}
           AUTH: ${{ secrets.AUTH }}
         
-      run: 
-       python3 main.py
+      run: python3 main.py
 
     - name: Create run.log
       run: echo $(date -u) > run.log
